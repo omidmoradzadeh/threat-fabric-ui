@@ -142,8 +142,6 @@
   </div>
 </template>
 
-images.profileImg
-
 <script>
 export default {
   name: "SideMenuView",

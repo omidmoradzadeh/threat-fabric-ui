@@ -10,6 +10,7 @@ import InputText from "primevue/inputtext";
 import Card from "primevue/card";
 import Menubar from "primevue/menubar";
 import Chart from "primevue/chart";
+import NewChart from "vue2-frappe";
 
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
@@ -20,6 +21,7 @@ const app = createApp(App);
 
 app.use(PrimeVue);
 app.use(router);
+app.use(NewChart);
 
 app.component("Button", Button);
 app.component("Dialog", Dialog);
