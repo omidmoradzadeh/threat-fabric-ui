@@ -1,18 +1,12 @@
 <template>
-  <template>
-    <div>
-      <Chart type="bar" :data="chartData" :options="chartOptions" />
-    </div>
-  </template>
+  <Chart type="bar" :data="basicData" />
 </template>
 
 <script>
 export default {
-  name: "CardView",
-  created: function () {},
   data() {
     return {
-      chartData: {
+      basicData: {
         labels: [
           "January",
           "February",
@@ -24,63 +18,18 @@ export default {
         ],
         datasets: [
           {
-            type: "line",
-            label: "Dataset 1",
-            borderColor: "#42A5F5",
-            borderWidth: 2,
-            fill: false,
-            data: [50, 25, 12, 48, 56, 76, 42],
+            label: "My First dataset",
+            backgroundColor: "#42A5F5",
+            data: [65, 59, 80, 81, 56, 55, 40],
           },
           {
-            type: "bar",
-            label: "Dataset 2",
-            backgroundColor: "#66BB6A",
-            data: [21, 84, 24, 75, 37, 65, 34],
-            borderColor: "white",
-            borderWidth: 2,
-          },
-          {
-            type: "bar",
-            label: "Dataset 3",
-            backgroundColor: "#FFA726",
-            data: [41, 52, 24, 74, 23, 21, 32],
+            label: "My Second dataset",
+            backgroundColor: "#9CCC65",
+            data: [28, 48, 40, 19, 86, 27, 90],
           },
         ],
-      },
-      chartOptions: {
-        plugins: {
-          legend: {
-            labels: {
-              color: "#495057",
-            },
-          },
-        },
-        scales: {
-          x: {
-            ticks: {
-              color: "#495057",
-            },
-            grid: {
-              color: "#ebedef",
-            },
-          },
-          y: {
-            ticks: {
-              color: "#495057",
-            },
-            grid: {
-              color: "#ebedef",
-            },
-          },
-        },
       },
     };
   },
 };
 </script>
-
-<style>
-.border-round {
-  border-radius: 10px !important;
-}
-</style>

@@ -9,7 +9,7 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Card from "primevue/card";
 import Menubar from "primevue/menubar";
-import Chart from "primevue/Chart";
+import Chart from "primevue/chart";
 
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
