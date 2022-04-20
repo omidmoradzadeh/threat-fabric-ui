@@ -13,6 +13,11 @@
       :dataSets="this.chartData"
     >
     </vue-frappe>
+    label : {{ labels }} <br />
+    id : {{ id }} <br />
+    type : {{ type }} <br />
+    height : {{ height }} <br />
+    dataSets : {{ dataSets }} <br />
   </div>
 </template>
 
@@ -24,10 +29,10 @@ export default {
       type: String,
       default: () => "chart" + Math.floor(Math.random() * 10000),
     },
-    labels: { type: Array, default: () => ["010101"] },
+    labels: { type: Array, default: () => ["2022-04-30"] },
     title: {
       type: String,
-      default: "hi",
+      default: "No Name",
     },
     type: {
       type: String,
@@ -49,13 +54,5 @@ export default {
       ],
     },
   },
-  //   data() {
-  //     return {
-  //       chartId: "chart",
-  //     };
-  //   },
-  //   mounted() {
-  //     this.chartId = this.chartId + this._uid;
-  //   },
 };
 </script>
