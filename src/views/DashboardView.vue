@@ -21,7 +21,7 @@
       <DashboardFilterView @reload="reload" />
     </div>
     <div class="col-12" v-if="this.chart1 != undefined">
-      <BaseChartView
+      <ChartView
         :title="chart1?.title"
         :type="chart1?.type"
         :labels="chart1?.labels"
@@ -31,7 +31,7 @@
       />
     </div>
     <div class="col-12" v-if="this.chart2 != undefined">
-      <BaseChartView
+      <ChartView
         :title="chart2?.title"
         :type="chart2?.type"
         :labels="chart2?.labels"
@@ -41,7 +41,7 @@
       />
     </div>
     <div class="col-12" v-if="this.chart3 != undefined">
-      <BaseChartView
+      <ChartView
         :title="chart3?.title"
         :type="chart3?.type"
         :labels="chart3?.labels"
@@ -54,12 +54,10 @@
 </template>
 
 <script>
-import CardView from "./CardView.vue";
-// import MenuView from "./MenuView.vue";
-// import SideMenu from "./SideMenu.vue";
-import BaseChartView from "./BaseChartView.vue";
-import RateCardView from "./RateCardView.vue";
-import DashboardFilterView from "./DashboardFilterView.vue";
+import CardView from "../components/CardComponent.vue";
+import ChartView from "../components/ChartComponent.vue";
+import RateCardView from "../components/RateCardComponent.vue";
+import DashboardFilterView from "../components/DashboardFilterComponent.vue";
 import DashboardService from "../service/apis/dashboard.service";
 
 var dashboardService = new DashboardService();
@@ -67,7 +65,7 @@ var dashboardService = new DashboardService();
 export default {
   components: {
     CardView,
-    BaseChartView,
+    ChartView,
     RateCardView,
     DashboardFilterView,
   },

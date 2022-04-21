@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "CardView",
+  name: "CardComponent",
   created: function () {},
   props: {
     details: {

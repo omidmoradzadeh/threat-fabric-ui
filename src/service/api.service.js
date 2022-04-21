@@ -5,7 +5,6 @@ import AxiosInterceptors from "./axios-interceptors.service";
 class ApiService {
   init = () => {
     axios.defaults.baseURL = API_BASE_URL + API_KEY;
-    /** Adding the request interceptors */
     AxiosInterceptors.configRequestHeader();
   };
 
@@ -18,15 +17,14 @@ class ApiService {
   };
 
   post = (resource, data) => {
-    return axios.get(resource, data);
-    // return axios.post(resource, data);
+    return axios.post(resource, data);
   };
 
   put = (resource, data) => {
     return axios.put(resource, data);
   };
 
-  _delete = (resource) => {
+  delete = (resource) => {
     return axios.delete(resource);
   };
 }

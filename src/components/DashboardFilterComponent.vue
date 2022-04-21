@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "DashboardFilterView",
+  name: "DashboardFilterComponent",
   components: {},
   created() {},
   data() {

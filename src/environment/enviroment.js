@@ -1,5 +1,5 @@
-const API_KEY = "42700c01340e623773ac1e787177a4b9";
-const API_BASE_URL = "";
+const API_BASE_URL = "http://localhost:6060/api/";
+const API_KEY = "";
 const TOKEN_KEY = "";
 
-export { API_KEY, API_BASE_URL, TOKEN_KEY };
+export default { API_BASE_URL, API_KEY, TOKEN_KEY };

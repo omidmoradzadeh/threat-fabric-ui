@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "ChartView",
+  name: "ChartComponent",
   props: {
     id: {
       type: String,

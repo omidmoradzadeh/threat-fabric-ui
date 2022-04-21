@@ -1,31 +1,28 @@
 import axios from "axios";
+import API_BASE_URL from "../../environment/enviroment";
 
 export default class DashboardService {
   getStatisticData() {
-    return axios
-      .get("http://localhost:6060/dashboard/Statistic")
-      .then((res) => res.data);
+    return axios.get(API_BASE_URL + "Statistic").then((res) => res.data);
   }
 
   getInfectedChartData() {
-    return axios
-      .get("http://localhost:6060/dashboard/InfectedChart")
-      .then((res) => res.data);
+    return axios.get(API_BASE_URL + "InfectedChart").then((res) => res.data);
   }
 
   getRootedChartData() {
-    return axios
-      .get("http://localhost:6060/dashboard/RootedChart")
-      .then((res) => res.data);
+    return axios.get(API_BASE_URL + "RootedChart").then((res) => res.data);
   }
 
   getAbnormalChartData() {
     return axios
-      .get("http://localhost:6060/dashboard/AbnormalChart")
+      .get(this.API_BASE_URL + "AbnormalChart")
       .then((res) => res.data);
   }
 
   getDashboard() {
-    return axios.get("http://localhost:6060/dashboard").then((res) => res.data);
+    debugger;
+
+    return axios.get(API_BASE_URL + "dashboard").then((res) => res.data);
   }
 }

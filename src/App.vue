@@ -173,12 +173,8 @@
 </template>
 
 <script>
-// import SideMenu from "./views/SideMenu.vue";
-
 export default {
-  components: {
-    // SideMenu,
-  },
+  components: {},
   data() {
     return {
       userName: "Omid Moradzadeh",

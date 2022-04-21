@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "ProgressCardView",
+  name: "RateCardComponent",
   components: {},
   props: {
     title: {
