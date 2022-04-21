@@ -1,90 +1,62 @@
 <template>
   <!-- <MenuView /> -->
-  <div class="min-h-screen flex relative lg:static surface-ground">
-    <SideMenu :items="[]" />
-    <div class="min-h-screen flex flex-column relative flex-auto">
-      <div class="p-5 flex flex-column flex-auto">
-        <div class="grid">
-          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu1 != undefined">
-            <CardView :details="menu1" />
-          </div>
-          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu2 != undefined">
-            <CardView :details="menu2" />
-          </div>
-          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu3 != undefined">
-            <CardView :details="menu3" />
-          </div>
-          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu4 != undefined">
-            <CardView :details="menu4" />
-          </div>
+  <div class="grid">
+    <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu1 != undefined">
+      <CardView :details="menu1" />
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu2 != undefined">
+      <CardView :details="menu2" />
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu3 != undefined">
+      <CardView :details="menu3" />
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu4 != undefined">
+      <CardView :details="menu4" />
+    </div>
 
-          <div
-            class="col-12 lg:col-6 xl:col-6"
-            v-if="this.progress != undefined"
-          >
-            <RateCardView
-              :title="progress?.title"
-              :progress="progress?.progress"
-            />
-          </div>
-          <div class="col-12 lg:col-3 xl:col-3">
-            <DashboardFilterView @reload="reload" />
-          </div>
-          <div class="col-12" v-if="this.chart1 != undefined">
-            <BaseChartView
-              :title="chart1?.title"
-              :type="chart1?.type"
-              :labels="chart1?.labels"
-              :height="chart1?.height"
-              :colors="chart1?.colors"
-              :chartData="chart1?.chartData"
-            />
-          </div>
-          <div class="col-12" v-if="this.chart2 != undefined">
-            <BaseChartView
-              :title="chart2?.title"
-              :type="chart2?.type"
-              :labels="chart2?.labels"
-              :height="chart2?.height"
-              :colors="chart2?.colors"
-              :chartData="chart2?.chartData"
-            />
-          </div>
-          <div class="col-12" v-if="this.chart3 != undefined">
-            <BaseChartView
-              :title="chart3?.title"
-              :type="chart3?.type"
-              :labels="chart3?.labels"
-              :height="chart3?.height"
-              :colors="chart3?.colors"
-              :chartData="chart3?.chartData"
-            />
-          </div>
-        </div>
-      </div>
+    <div class="col-12 lg:col-6 xl:col-6" v-if="this.progress != undefined">
+      <RateCardView :title="progress?.title" :progress="progress?.progress" />
+    </div>
+    <div class="col-12 lg:col-3 xl:col-3">
+      <DashboardFilterView @reload="reload" />
+    </div>
+    <div class="col-12" v-if="this.chart1 != undefined">
+      <BaseChartView
+        :title="chart1?.title"
+        :type="chart1?.type"
+        :labels="chart1?.labels"
+        :height="chart1?.height"
+        :colors="chart1?.colors"
+        :chartData="chart1?.chartData"
+      />
+    </div>
+    <div class="col-12" v-if="this.chart2 != undefined">
+      <BaseChartView
+        :title="chart2?.title"
+        :type="chart2?.type"
+        :labels="chart2?.labels"
+        :height="chart2?.height"
+        :colors="chart2?.colors"
+        :chartData="chart2?.chartData"
+      />
+    </div>
+    <div class="col-12" v-if="this.chart3 != undefined">
+      <BaseChartView
+        :title="chart3?.title"
+        :type="chart3?.type"
+        :labels="chart3?.labels"
+        :height="chart3?.height"
+        :colors="chart3?.colors"
+        :chartData="chart3?.chartData"
+      />
     </div>
   </div>
-
-  <!-- 
-  <div class="card">
-    <div class="flex card-container indigo-container">
-      <div class="flex-1 text-center p-4 border-round">
-        <CardView />
-      </div>
-      <div class="flex-1 text-center p-4 border-round">
-        <CardView />
-      </div>
-      <div class="flex-1 text-center p-4 border-round">
-        <CardView />
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
 import CardView from "./CardView.vue";
 // import MenuView from "./MenuView.vue";
-import SideMenu from "./SideMenu.vue";
+// import SideMenu from "./SideMenu.vue";
 import BaseChartView from "./BaseChartView.vue";
 import RateCardView from "./RateCardView.vue";
 import DashboardFilterView from "./DashboardFilterView.vue";
@@ -94,9 +66,7 @@ var dashboardService = new DashboardService();
 
 export default {
   components: {
-    // MenuView,
     CardView,
-    SideMenu,
     BaseChartView,
     RateCardView,
     DashboardFilterView,
@@ -163,9 +133,19 @@ export default {
         this.menu3 = data.menu3;
         this.menu4 = data.menu4;
         this.progress = data.progress;
-        this.chart1 = data.chart1;
-        this.chart2 = data.chart2;
-        this.chart3 = data.chart3;
+        // this.chart1 = data.chart1;
+        // this.chart2 = data.chart2;
+        // this.chart3 = data.chart3;
+      });
+
+      dashboardService.getInfectedChartData().then((data) => {
+        this.chart1 = data.chart;
+      });
+      dashboardService.getRootedChartData().then((data) => {
+        this.chart2 = data.chart;
+      });
+      dashboardService.getAbnormalChartData().then((data) => {
+        this.chart3 = data.chart;
       });
     },
   },

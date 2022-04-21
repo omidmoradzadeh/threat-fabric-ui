@@ -10,14 +10,11 @@
         <img :src="images.logo" alt="Image" height="35" />
       </div>
       <div class="mt-3">
-        <!-- <router-link v-for="item in items" :key="item.name" :to="item.to">{{
-          item.name
-        }}</router-link> -->
         <ul class="list-none p-0 m-0">
-          <li v-for="item in items" :key="item.name">
-            <a
-              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center border-left-2 border-cyan-600 hover:border-300 transition-duration-150 transition-colors p-ripple"
-              :class="item.isActive ? 'text-cyan-600 ' : ''"
+          <li v-for="item in items" :key="item.name" id="nav">
+            <router-link
+              :to="{ name: item.to }"
+              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center transition-duration-150 transition-colors p-ripple"
               ><i
                 class="pi mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl"
                 :class="item.icon"
@@ -25,8 +22,8 @@
               ><span class="font-medium inline text-base lg:text-xs lg:block">{{
                 item.name
               }}</span
-              ><span class="p-ink"></span
-            ></a>
+              ><span class="p-ink"></span>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -52,41 +49,20 @@ export default {
   name: "SideMenuView",
   components: {},
   props: {
-    // items: {
-    //   type: Array,
-    //   default: () => [
-    //     {
-    //       name: "Home",
-    //       icon: "pi-home",
-    //     },
-    //   ],
-    // },
+    items: {
+      type: Array,
+      default: () => [
+        {
+          name: "Dashboard",
+          icon: "pi-home",
+          color: "text-gray-500",
+          to: "dashboard",
+        },
+      ],
+    },
   },
   data() {
     return {
-      items: [
-        {
-          name: "Home",
-          icon: "pi-home",
-          color: "text-gray-500",
-          isActive: true,
-          to: "/dashboard",
-        },
-        {
-          name: "Device",
-          icon: "pi-th-large",
-          color: "text-gray-500",
-          isActive: false,
-          to: "/devices",
-        },
-        {
-          name: "Setting",
-          icon: "pi-cog",
-          color: "text-gray-500",
-          isActive: false,
-          to: "/devices",
-        },
-      ],
       images: {
         profileImg: require("@/assets/static/images/omid.jpg"),
         logo: require("@/assets/static/images/logo.jpg"),
@@ -95,3 +71,25 @@ export default {
   },
 };
 </script>
+
+<style lang="css">
+ul #nav {
+  color: var(--bluegray-300);
+  border-left-width: 2px !important;
+  border-left-style: solid;
+  border-color: var(--bluegray-300);
+}
+
+ul #nav:hover {
+  color: var(--cyan-600) !important;
+  border-left-width: 2px !important;
+  border-left-style: solid;
+  border-color: var(--cyan-600) !important;
+}
+.router-link-active {
+  color: var(--cyan-600) !important;
+  border-left-width: 2px !important;
+  border-left-style: solid;
+  border-color: var(--cyan-600) !important;
+}
+</style>

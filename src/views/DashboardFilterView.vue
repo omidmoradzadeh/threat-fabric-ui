@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     reload() {
-      this.$emit("reload", "reloadedddd");
+      this.$emit("reload", "reload");
     },
   },
 };
