@@ -1,7 +1,4 @@
 <template>
-  <span class="customer-badge status-unqualified" data-v-4da3ac46=""
-    >unqualified</span
-  >
   <div>
     <DataTable
       :value="devices"
@@ -24,7 +21,7 @@
         'lastSeenTimestamp',
       ]"
       responsiveLayout="scroll"
-      v-model:selection="selecteddevices"
+      v-model:selection="selectedDevices"
       :selectAll="selectAll"
       @select-all-change="onSelectAllChange"
       @row-select="onRowSelect"
@@ -38,15 +35,6 @@
         ref="deviceId"
         :sortable="true"
       >
-        <template>
-          <InputText
-            type="text"
-            v-model="filterModel.value"
-            @keydown.enter="filterCallback()"
-            class="p-column-filter"
-            placeholder="Search by name"
-          />
-        </template>
       </Column>
       <Column
         field="deviceType"
@@ -56,15 +44,6 @@
         ref="deviceType"
         :sortable="true"
       >
-        <template>
-          <InputText
-            type="text"
-            v-model="filterModel.value"
-            @keydown.enter="filterCallback()"
-            class="p-column-filter"
-            placeholder="Search by country"
-          />
-        </template>
         <template #body="slotProps">
           <img
             :src="getDeviceTypeImg(slotProps.data.deviceType)"
@@ -84,15 +63,6 @@
         ref="deviceRiskLevelScore"
         :sortable="true"
       >
-        <template>
-          <InputText
-            type="text"
-            v-model="filterModel.value"
-            @keydown.enter="filterCallback()"
-            class="p-column-filter"
-            placeholder="Search by company"
-          />
-        </template>
         <template #body="slotProps">
           <span
             v-bind:class="
@@ -111,15 +81,6 @@
         ref="lastSeenTimestamp"
         :sortable="true"
       >
-        <template>
-          <InputText
-            type="text"
-            v-model="filterModel.value"
-            @keydown.enter="filterCallback()"
-            class="p-column-filter"
-            placeholder="Search by representative"
-          />
-        </template>
       </Column>
     </DataTable>
   </div>
@@ -133,7 +94,7 @@ export default {
       loading: false,
       totalRecords: 0,
       devices: null,
-      selecteddevices: null,
+      selectedDevices: null,
       selectAll: false,
       filters: {
         name: { value: "", matchMode: "contains" },
@@ -143,10 +104,10 @@ export default {
       },
       lazyParams: {},
       columns: [
-        { field: "name", header: "Name" },
-        { field: "country.name", header: "Country" },
-        { field: "company", header: "Company" },
-        { field: "representative.name", header: "Representative" },
+        { field: "deviceId", header: "Device Id" },
+        { field: "deviceType", header: "Device Type" },
+        { field: "deviceRiskLevelScore", header: "Device Risk Level Score" },
+        { field: "lastSeenTimestamp", header: "Last Seen Timestamp" },
       ],
       iosImg: require("@/assets/static/icons/ios.png"),
       androidImg: require("@/assets/static/icons/android.png"),
@@ -178,7 +139,7 @@ export default {
         this.deviceService
           .getdevices({ lazyEvent: JSON.stringify(this.lazyParams) })
           .then((data) => {
-            this.devices = data.devices;
+            this.devices = data.devices._elements;
             this.totalRecords = data.totalRecords;
             this.loading = false;
           });
@@ -202,32 +163,26 @@ export default {
       if (selectAll) {
         this.deviceService.getdevices().then((data) => {
           this.selectAll = true;
-          this.selecteddevices = data.devices;
+          debugger;
+          this.selectedDevices = data.devices._elements;
         });
       } else {
         this.selectAll = false;
-        this.selecteddevices = [];
+        this.selectedDevices = [];
       }
     },
     onRowSelect() {
-      this.selectAll = this.selecteddevices.length === this.totalRecords;
+      this.selectAll = this.selectedDevices.length === this.totalRecords;
     },
     onRowUnselect() {
       this.selectAll = false;
     },
-    // getDeviceRiskLevelBadge() {
-    //   return "customer-badge status-success";
-    //   // debugger;
-    //   // var deviceRiskLevel = 1;
-    //   // if (deviceRiskLevel == 1) return "customer-badge status-success";
-    //   // if (deviceRiskLevel == 2) return "customer-badge status-warning";
-    //   // if (deviceRiskLevel == 3) return "customer-badge status-danger";
-    // },
+
     getDeviceRiskLevelBadge(deviceRiskLevel) {
       return {
-        "customer-badge status-success": deviceRiskLevel == 1,
-        "customer-badge status-warning": deviceRiskLevel == 2,
-        "customer-badge status-danger": deviceRiskLevel == 3,
+        "device-badge status-success": deviceRiskLevel == 1,
+        "device-badge status-warning": deviceRiskLevel == 2,
+        "device-badge status-danger": deviceRiskLevel == 3,
       };
     },
     getDeviceRiskLevelValue(deviceRiskLevel) {
@@ -245,7 +200,7 @@ export default {
 </script>
 
 <style scoped>
-.customer-badge {
+.device-badge {
   border-radius: 2px;
   padding: 0.25em 0.5rem;
   text-transform: uppercase;
@@ -254,17 +209,17 @@ export default {
   letter-spacing: 0.3px;
 }
 
-.customer-badge.status-success {
+.device-badge.status-success {
   background-color: #c8e6c9;
   color: #256029;
 }
 
-.customer-badge.status-warning {
+.device-badge.status-warning {
   background-color: #feedaf;
   color: #8a5340;
 }
 
-.customer-badge.status-danger {
+.device-badge.status-danger {
   background-color: #ff0000;
   color: #feedaf;
 }
