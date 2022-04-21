@@ -10,8 +10,14 @@ import InputText from "primevue/inputtext";
 import Card from "primevue/card";
 import Menubar from "primevue/menubar";
 import Chart from "primevue/chart";
-import NewChart from "vue2-frappe";
 import Calendar from "primevue/calendar";
+import Column from "primevue/column";
+import Rating from "primevue/rating";
+import DataTable from "primevue/datatable";
+import Dropdown from "primevue/dropdown";
+import MultiSelect from "primevue/multiselect";
+import Badge from "primevue/badge";
+import NewChart from "vue2-frappe";
 
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
@@ -31,5 +37,11 @@ app.component("Card", Card);
 app.component("Menubar", Menubar);
 app.component("Chart", Chart);
 app.component("Calendar", Calendar);
+app.component("Column", Column);
+app.component("Rating", Rating);
+app.component("DataTable", DataTable);
+app.component("Dropdown", Dropdown);
+app.component("MultiSelect", MultiSelect);
+app.component("Badge", Badge);
 
 app.mount("#app");
