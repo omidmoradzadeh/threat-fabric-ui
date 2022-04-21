@@ -1,21 +1,34 @@
 <template>
   <!-- <MenuView /> -->
   <div class="min-h-screen flex relative lg:static surface-ground">
-    <SideMenu />
+    <SideMenu :items="[]" />
     <div class="min-h-screen flex flex-column relative flex-auto">
       <div class="p-5 flex flex-column flex-auto">
         <div class="grid">
-          <div class="col-12 lg:col-6 xl:col-3">
-            <CardView :details="menu1" :v-if="menu1 != undefined" />
+          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu1 != undefined">
+            <CardView :details="menu1" />
           </div>
-          <div class="col-12 lg:col-6 xl:col-3">
+          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu2 != undefined">
             <CardView :details="menu2" />
           </div>
-          <div class="col-12 lg:col-6 xl:col-3">
+          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu3 != undefined">
             <CardView :details="menu3" />
           </div>
-          <div class="col-12 lg:col-6 xl:col-3">
+          <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu4 != undefined">
             <CardView :details="menu4" />
+          </div>
+
+          <div
+            class="col-12 lg:col-6 xl:col-6"
+            v-if="this.progress != undefined"
+          >
+            <RateCardView
+              :title="progress?.title"
+              :progress="progress?.progress"
+            />
+          </div>
+          <div class="col-12 lg:col-3 xl:col-3">
+            <DashboardFilterView @reload="reload" />
           </div>
           <div class="col-12" v-if="this.chart1 != undefined">
             <BaseChartView
@@ -47,7 +60,6 @@
               :chartData="chart3?.chartData"
             />
           </div>
-          <button @click="awesome = !awesome">{{ chart2 }}</button>
         </div>
       </div>
     </div>
@@ -74,7 +86,11 @@ import CardView from "./CardView.vue";
 // import MenuView from "./MenuView.vue";
 import SideMenu from "./SideMenu.vue";
 import BaseChartView from "./BaseChartView.vue";
+import RateCardView from "./RateCardView.vue";
+import DashboardFilterView from "./DashboardFilterView.vue";
 import DashboardService from "../service/apis/dashboard.service";
+
+var dashboardService = new DashboardService();
 
 export default {
   components: {
@@ -82,10 +98,25 @@ export default {
     CardView,
     SideMenu,
     BaseChartView,
+    RateCardView,
+    DashboardFilterView,
   },
   data() {
     return {
-      awesome: false,
+      menuItems: [
+        {
+          name: "Home",
+          icon: "pi-home",
+        },
+        {
+          name: "Device",
+          icon: "pi-home",
+        },
+        {
+          name: "Setting",
+          icon: "pi-home",
+        },
+      ],
       menu1: undefined,
       menu2: undefined,
       menu3: undefined,
@@ -93,23 +124,50 @@ export default {
       chart1: undefined,
       chart2: undefined,
       chart3: undefined,
+      progress: undefined,
     };
   },
   created() {
-    var dashboardService = new DashboardService();
-    dashboardService.getInfectedChartData().then((data) => {
-      this.chart1 = data.chart;
-    });
-    dashboardService.getRootedChartData().then((data) => {
-      this.chart2 = data.chart;
-    });
-    dashboardService.getAbnormalChartData().then((data) => {
-      this.chart3 = data.chart;
-    });
-    // dashboardService.getChartData().then((data) => {
-    //   this.menu1 = data.dashboardData;
+    // dashboardService.getInfectedChartData().then((data) => {
+    //   this.chart1 = data.chart;
     // });
+    // dashboardService.getRootedChartData().then((data) => {
+    //   this.chart2 = data.chart;
+    // });
+    // dashboardService.getAbnormalChartData().then((data) => {
+    //   this.chart3 = data.chart;
+    // });
+    // dashboardService.getStatisticData().then((data) => {
+    //   this.menu1 = data.menu1;
+    //   this.menu2 = data.menu2;
+    //   this.menu3 = data.menu3;
+    //   this.menu4 = data.menu4;
+    //   this.progress = data.progress;
+    // });
+    this.reload(null);
   },
   mounted() {},
+  methods: {
+    reload(date) {
+      console.log("new date ", date);
+      // dashboardService.getStatisticData().then((data) => {
+      //   this.menu1 = data.menu1;
+      //   this.menu2 = data.menu2;
+      //   this.menu3 = data.menu3;
+      //   this.menu4 = data.menu4;
+      //   this.progress = data.progress;
+      // });
+      dashboardService.getDashboard().then((data) => {
+        this.menu1 = data.menu1;
+        this.menu2 = data.menu2;
+        this.menu3 = data.menu3;
+        this.menu4 = data.menu4;
+        this.progress = data.progress;
+        this.chart1 = data.chart1;
+        this.chart2 = data.chart2;
+        this.chart3 = data.chart3;
+      });
+    },
+  },
 };
 </script>

@@ -1,6 +1,5 @@
 <template>
   <div
-    id="app-sidebar-9"
     class="h-full lg:h-auto surface-section lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border w-18rem lg:w-7rem select-none hidden"
   >
     <div class="flex flex-column h-full">
@@ -8,118 +7,24 @@
         class="flex align-items-center justify-content-center flex-shrink-0"
         style="height: 60px"
       >
-        <img :src="images.logo" alt="Image" height="30" />
+        <img :src="images.logo" alt="Image" height="35" />
       </div>
       <div class="mt-3">
+        <!-- <router-link v-for="item in items" :key="item.name" :to="item.to">{{
+          item.name
+        }}</router-link> -->
         <ul class="list-none p-0 m-0">
-          <li>
+          <li v-for="item in items" :key="item.name">
             <a
-              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center text-cyan-600 border-left-2 border-cyan-600 hover:border-300 transition-duration-150 transition-colors p-ripple"
+              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center border-left-2 border-cyan-600 hover:border-300 transition-duration-150 transition-colors p-ripple"
+              :class="item.isActive ? 'text-cyan-600 ' : ''"
               ><i
-                class="pi pi-home mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl"
+                class="pi mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl"
+                :class="item.icon"
               ></i
-              ><span class="font-medium inline text-base lg:text-xs lg:block"
-                >Home</span
-              ><span class="p-ink"></span
-            ></a>
-          </li>
-          <li>
-            <a
-              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center text-600 border-left-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple"
-              ><i
-                class="pi pi-search mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl"
-              ></i
-              ><span class="font-medium inline text-base lg:text-xs lg:block"
-                >Search</span
-              ><span class="p-ink"></span
-            ></a>
-          </li>
-          <li>
-            <a
-              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center text-600 border-left-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple"
-              ><i
-                class="pi pi-users mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl"
-              ></i
-              ><span class="font-medium inline text-base lg:text-xs lg:block"
-                >Team</span
-              ><span class="p-ink"></span
-            ></a>
-          </li>
-          <li class="relative">
-            <a
-              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center text-600 border-left-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple"
-              ><i
-                class="pi pi-chart-line mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl p-overlay-badge"
-                ><span
-                  id="pv_id_5_badge"
-                  class="p-badge p-component p-badge-danger p-badge-dot"
-                ></span></i
-              ><span class="font-medium inline text-base lg:text-xs lg:block"
-                >Reports</span
-              ><i class="pi pi-chevron-down ml-auto lg:hidden"></i
-              ><span class="p-ink"></span
-            ></a>
-            <ul
-              class="list-none pl-3 pr-0 py-0 lg:p-3 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out static border-round-right lg:absolute left-100 top-0 z-1 surface-overlay shadow-none lg:shadow-2 w-full lg:w-15rem"
-            >
-              <li>
-                <a
-                  class="flex align-items-center cursor-pointer p-3 hover:surface-100 hover:text-900 border-round text-600 hover:text-700 transition-duration-150 transition-colors p-ripple"
-                  ><i class="pi pi-chart-line mr-2"></i
-                  ><span class="font-medium">Revenue</span
-                  ><i class="pi pi-chevron-down ml-auto"></i
-                  ><span class="p-ink"></span
-                ></a>
-                <ul
-                  class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out"
-                >
-                  <li>
-                    <a
-                      class="flex align-items-center cursor-pointer p-3 hover:surface-100 hover:text-900 border-round text-600 hover:text-700 transition-duration-150 transition-colors p-ripple"
-                      ><i class="pi pi-table mr-2"></i
-                      ><span class="font-medium">View</span
-                      ><span class="p-ink"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a
-                      class="flex align-items-center cursor-pointer p-3 hover:surface-100 hover:text-900 border-round text-600 hover:text-700 transition-duration-150 transition-colors p-ripple"
-                      ><i class="pi pi-search mr-2"></i
-                      ><span class="font-medium">Search</span
-                      ><span class="p-ink"></span
-                    ></a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  class="flex align-items-center cursor-pointer p-3 hover:surface-100 hover:text-900 border-round text-600 hover:text-700 transition-duration-150 transition-colors p-ripple"
-                  ><i class="pi pi-chart-line mr-2"></i
-                  ><span class="font-medium">Expenses</span
-                  ><span class="p-ink"></span
-                ></a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a
-              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center text-600 border-left-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple"
-              ><i
-                class="pi pi-calendar mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl"
-              ></i
-              ><span class="font-medium inline text-base lg:text-xs lg:block"
-                >Events</span
-              ><span class="p-ink"></span
-            ></a>
-          </li>
-          <li>
-            <a
-              class="flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center text-600 border-left-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple"
-              ><i
-                class="pi pi-cog mr-2 lg:mr-0 mb-0 lg:mb-2 text-base lg:text-2xl"
-              ></i
-              ><span class="font-medium inline text-base lg:text-xs lg:block"
-                >Options</span
+              ><span class="font-medium inline text-base lg:text-xs lg:block">{{
+                item.name
+              }}</span
               ><span class="p-ink"></span
             ></a>
           </li>
@@ -146,8 +51,42 @@
 export default {
   name: "SideMenuView",
   components: {},
+  props: {
+    // items: {
+    //   type: Array,
+    //   default: () => [
+    //     {
+    //       name: "Home",
+    //       icon: "pi-home",
+    //     },
+    //   ],
+    // },
+  },
   data() {
     return {
+      items: [
+        {
+          name: "Home",
+          icon: "pi-home",
+          color: "text-gray-500",
+          isActive: true,
+          to: "/dashboard",
+        },
+        {
+          name: "Device",
+          icon: "pi-th-large",
+          color: "text-gray-500",
+          isActive: false,
+          to: "/devices",
+        },
+        {
+          name: "Setting",
+          icon: "pi-cog",
+          color: "text-gray-500",
+          isActive: false,
+          to: "/devices",
+        },
+      ],
       images: {
         profileImg: require("@/assets/static/images/omid.jpg"),
         logo: require("@/assets/static/images/logo.jpg"),

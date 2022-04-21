@@ -7,9 +7,9 @@ const routes = [
     component: () => import("../views/DashboardView.vue"),
   },
   {
-    path: "/about",
-    name: "about",
-    component: () => import("../views/AboutView.vue"),
+    path: "/device",
+    name: "device",
+    component: () => import("../views/DeviceView.vue"),
   },
   {
     path: "/menu",

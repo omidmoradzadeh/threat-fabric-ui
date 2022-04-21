@@ -25,9 +25,7 @@ export default class DashboardService {
       .then((res) => res.data);
   }
 
-  getBooksForBanner() {
-    return axios
-      .get(window.origin + "/demo/data/book-banner.json")
-      .then((res) => res.data.data);
+  getDashboard() {
+    return axios.get("http://localhost:6060/dashboard").then((res) => res.data);
   }
 }

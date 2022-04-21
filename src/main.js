@@ -11,6 +11,7 @@ import Card from "primevue/card";
 import Menubar from "primevue/menubar";
 import Chart from "primevue/chart";
 import NewChart from "vue2-frappe";
+import Calendar from "primevue/calendar";
 
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
@@ -29,5 +30,6 @@ app.component("InputText", InputText);
 app.component("Card", Card);
 app.component("Menubar", Menubar);
 app.component("Chart", Chart);
+app.component("Calendar", Calendar);
 
 app.mount("#app");

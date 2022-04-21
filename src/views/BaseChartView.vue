@@ -13,11 +13,6 @@
       :dataSets="this.chartData"
     >
     </vue-frappe>
-    label : {{ labels }} <br />
-    id : {{ id }} <br />
-    type : {{ type }} <br />
-    height : {{ height }} <br />
-    dataSets : {{ dataSets }} <br />
   </div>
 </template>
 
@@ -32,7 +27,7 @@ export default {
     labels: { type: Array, default: () => ["2022-04-30"] },
     title: {
       type: String,
-      default: "No Name",
+      default: "No Title",
     },
     type: {
       type: String,

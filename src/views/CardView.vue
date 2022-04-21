@@ -11,10 +11,7 @@
         class="flex align-items-center justify-content-center bg-blue-100 border-round"
         style="width: 2.5rem; height: 2.5rem"
       >
-        <i
-          class="pi pi-shopping-cart text-blue-500 text-xl"
-          :class="details?.iconClass"
-        ></i>
+        <i class="pi text-blue-500 text-xl" :class="details?.iconClass"></i>
       </div>
     </div>
     <i class="pi text-l mr-2" :class="details?.descriptionClass"></i>
