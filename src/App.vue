@@ -126,8 +126,6 @@
         </div>
 
         <div class="p-5 flex flex-column flex-auto">
-          <!-- <div class="grid">
-            <div class="col-12"> -->
           <router-view />
         </div>
       </div>
@@ -211,21 +209,5 @@ ul #nav a:hover {
 
 #nav a {
   color: var(--blue-3);
-}
-
-a:link {
-  text-decoration: none;
-}
-
-a:visited {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-a:active {
-  text-decoration: none;
 }
 </style>

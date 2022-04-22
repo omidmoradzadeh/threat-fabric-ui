@@ -1,119 +1,120 @@
 <template>
-  <div>
-    <div class="flex align-items-center justify-content-between mb-4">
-      <span class="text-xl font-medium text-gray-1">Device</span>
-    </div>
-    <DataTable
-      :value="devices"
-      :lazy="true"
-      :paginator="true"
-      :rows="10"
-      v-model:filters="filters"
-      ref="dt"
-      dataKey="id"
-      :totalRecords="totalRecords"
-      :loading="loading"
-      @page="onPage($event)"
-      @sort="onSort($event)"
-      @filter="onFilter($event)"
-      filterDisplay="row"
-      :globalFilterFields="[
-        'deviceId',
-        'deviceType',
-        'deviceRiskLevelScore',
-        'lastSeenTimestamp',
-      ]"
-      responsiveLayout="scroll"
-      v-model:selection="selectedDevices"
-      :selectAll="selectAll"
-      @select-all-change="onSelectAllChange"
-      @row-select="onRowSelect"
-      @row-unselect="onRowUnselect"
-    >
-      <template #header>
-        <div class="flex justify-content-between">
-          <Button
-            label="Clear"
-            class="p-button ml-4 bg-light-blue-1"
-            @click="clearSearch"
-          />
-          <span class="p-input-icon-left">
-            <i class="pi pi-search" />
-            <InputText v-model="search" placeholder="Search Keyword" />
-          </span>
+  <div class="block-content">
+    <div class="px-4 py-8 md:px-6 lg:px-8">
+      <div class="surface-card p-4 shadow-2 border-round">
+        <div class="flex align-items-center justify-content-between mb-4">
+          <span class="text-xl font-medium text-gray-1">Device</span>
         </div>
-      </template>
-      <template #empty> No Device found. </template>
-      <template #loading> Loading device data. Please wait. </template>
-      <Column
-        field="deviceId"
-        header="Device Id"
-        filterMatchMode="startsWith"
-        ref="deviceId"
-        :sortable="true"
-      >
-      </Column>
-      <Column
-        field="deviceType"
-        header="Device Type"
-        filterField="deviceType"
-        filterMatchMode="contains"
-        ref="deviceType"
-        :sortable="true"
-      >
-        <template #body="slotProps">
-          <img
-            :src="getDeviceTypeImg(slotProps.data.deviceType)"
-            width="30"
-            class="deviceImage mr-1"
-          />
-          <span class="image-text">{{ slotProps.data.deviceType }}</span>
-        </template>
-        <!-- <template #body="slotProps">
-          <span>{{ slotProps.data.deviceType }}</span>
-        </template> -->
-      </Column>
-      <Column
-        field="deviceRiskLevelScore"
-        header="Device Risk Level Score"
-        filterMatchMode="contains"
-        ref="deviceRiskLevelScore"
-        :sortable="true"
-      >
-        <template #body="slotProps">
-          <span
-            v-bind:class="
-              getDeviceRiskLevelBadge(slotProps.data.deviceRiskLevelScore)
-            "
-            >{{
-              getDeviceRiskLevelValue(slotProps.data.deviceRiskLevelScore)
-            }}</span
+        <DataTable
+          :value="devices"
+          :lazy="true"
+          :paginator="true"
+          :rows="10"
+          v-model:filters="filters"
+          ref="dt"
+          dataKey="id"
+          :totalRecords="totalRecords"
+          :loading="loading"
+          @page="onPage($event)"
+          @sort="onSort($event)"
+          @filter="onFilter($event)"
+          filterDisplay="row"
+          :globalFilterFields="[
+            'deviceId',
+            'deviceType',
+            'deviceRiskLevelScore',
+            'lastSeenTimestamp',
+          ]"
+          responsiveLayout="scroll"
+          v-model:selection="selectedDevices"
+          :selectAll="selectAll"
+          @select-all-change="onSelectAllChange"
+          @row-select="onRowSelect"
+          @row-unselect="onRowUnselect"
+        >
+          <template #header>
+            <div class="flex justify-content-between">
+              <Button
+                label="Clear"
+                class="p-button ml-4 bg-light-blue-1"
+                @click="clearSearch"
+              />
+              <span class="p-input-icon-left">
+                <i class="pi pi-search" />
+                <InputText v-model="search" placeholder="Search Keyword" />
+              </span>
+            </div>
+          </template>
+          <template #empty> No Device found. </template>
+          <template #loading> Loading device data. Please wait. </template>
+          <Column
+            field="deviceId"
+            header="Device Id"
+            filterMatchMode="startsWith"
+            ref="deviceId"
+            :sortable="true"
           >
-        </template>
-      </Column>
-      <Column
-        field="lastSeenTimestamp"
-        header="Last Seen Timestamp"
-        filterField="lastSeenTimestamp"
-        ref="lastSeenTimestamp"
-        :sortable="true"
-      >
-      </Column>
-      <Column :exportable="false" style="min-width: 8rem">
-        <template #body="slotProps">
-          <router-link
-            :to="{
-              name: 'deviceDetail',
-              params: { id: slotProps.data.id },
-            }"
+          </Column>
+          <Column
+            field="deviceType"
+            header="Device Type"
+            filterField="deviceType"
+            filterMatchMode="contains"
+            ref="deviceType"
+            :sortable="true"
           >
-            <Button
-              icon=" pi pi-info-circle"
-              class="p-button-rounded -text-green-1 mr-2"
-          /></router-link>
-        </template>
-      </Column>
-    </DataTable>
+            <template #body="slotProps">
+              <img
+                :src="getDeviceTypeImg(slotProps.data.deviceType)"
+                width="30"
+                class="deviceImage mr-1"
+              />
+              <span class="image-text">{{ slotProps.data.deviceType }}</span>
+            </template>
+          </Column>
+          <Column
+            field="deviceRiskLevelScore"
+            header="Device Risk Level Score"
+            filterMatchMode="contains"
+            ref="deviceRiskLevelScore"
+            :sortable="true"
+          >
+            <template #body="slotProps">
+              <span
+                v-bind:class="
+                  getDeviceRiskLevelBadge(slotProps.data.deviceRiskLevelScore)
+                "
+                >{{
+                  getDeviceRiskLevelValue(slotProps.data.deviceRiskLevelScore)
+                }}</span
+              >
+            </template>
+          </Column>
+          <Column
+            field="lastSeenTimestamp"
+            header="Last Seen Timestamp"
+            filterField="lastSeenTimestamp"
+            ref="lastSeenTimestamp"
+            :sortable="true"
+          >
+          </Column>
+          <Column :exportable="false" style="min-width: 8rem">
+            <template #body="slotProps">
+              <router-link
+                :to="{
+                  name: 'deviceDetail',
+                  params: { id: slotProps.data.id },
+                }"
+              >
+                <Button
+                  icon=" pi pi-info-circle"
+                  class="p-button-rounded -text-green-1 mr-2"
+              /></router-link>
+            </template>
+          </Column>
+        </DataTable>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -11,4 +11,10 @@ export default class DeviceService {
       (res) => res.json()
     );
   }
+
+  getDevicesDetails(id) {
+    return fetch("http://localhost:6060/api/" + "deviceDetail/" + id).then(
+      (res) => res.json()
+    );
+  }
 }
