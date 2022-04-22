@@ -1,28 +1,32 @@
 import axios from "axios";
-import API_BASE_URL from "../../environment/enviroment";
 
+let VUE_APP_ROOT_API = "http://localhost:6060/api/";
 export default class DashboardService {
   getStatisticData() {
-    return axios.get(API_BASE_URL + "Statistic").then((res) => res.data);
+    return axios
+      .get(VUE_APP_ROOT_API + "Dashboard/Statistic")
+      .then((res) => res.data);
   }
 
   getInfectedChartData() {
-    return axios.get(API_BASE_URL + "InfectedChart").then((res) => res.data);
+    return axios
+      .get(VUE_APP_ROOT_API + "Dashboard/InfectedChart")
+      .then((res) => res.data);
   }
 
   getRootedChartData() {
-    return axios.get(API_BASE_URL + "RootedChart").then((res) => res.data);
+    return axios
+      .get(VUE_APP_ROOT_API + "Dashboard/RootedChart")
+      .then((res) => res.data);
   }
 
   getAbnormalChartData() {
     return axios
-      .get(this.API_BASE_URL + "AbnormalChart")
+      .get(VUE_APP_ROOT_API + "Dashboard/AbnormalChart")
       .then((res) => res.data);
   }
 
   getDashboard() {
-    debugger;
-
-    return axios.get(API_BASE_URL + "dashboard").then((res) => res.data);
+    return axios.get(VUE_APP_ROOT_API + "Dashboard").then((res) => res.data);
   }
 }

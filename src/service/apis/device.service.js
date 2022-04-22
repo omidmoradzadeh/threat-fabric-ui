@@ -1,4 +1,3 @@
-import API_BASE_URL from "../../environment/enviroment";
 export default class DeviceService {
   getDevices(params) {
     const queryParams = params
@@ -8,8 +7,8 @@ export default class DeviceService {
           )
           .join("&")
       : "";
-    return fetch(API_BASE_URL + "/device?" + queryParams).then((res) =>
-      res.json()
+    return fetch("http://localhost:6060/api/" + "device?" + queryParams).then(
+      (res) => res.json()
     );
   }
 }

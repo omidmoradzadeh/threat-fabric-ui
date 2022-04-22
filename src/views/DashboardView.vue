@@ -1,5 +1,4 @@
 <template>
-  <!-- <MenuView /> -->
   <div class="grid">
     <div class="col-12 lg:col-6 xl:col-3" v-if="this.menu1 != undefined">
       <CardView :details="menu1" />
@@ -93,6 +92,7 @@ export default {
       chart2: undefined,
       chart3: undefined,
       progress: undefined,
+      date: undefined,
     };
   },
   created() {
@@ -117,7 +117,7 @@ export default {
   mounted() {},
   methods: {
     reload(date) {
-      console.log("new date ", date);
+      this.date = date;
       // dashboardService.getStatisticData().then((data) => {
       //   this.menu1 = data.menu1;
       //   this.menu2 = data.menu2;

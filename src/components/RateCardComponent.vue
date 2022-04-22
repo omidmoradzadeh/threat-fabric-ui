@@ -1,7 +1,7 @@
 <template>
   <div class="surface-card shadow-2 border-round p-4">
     <div class="flex align-items-center justify-content-between mb-4">
-      <span class="text-xl font-medium text-900">{{ title }}</span>
+      <span class="text-xl font-medium text-gray-1">{{ title }}</span>
     </div>
     <div class="surface-border border-1 border-round p-3 mb-4">
       <div class="progress">
@@ -23,8 +23,7 @@
         class="flex align-items-center pb-3"
       >
         <span
-          class="border-round mr-3 flex-shrink-0"
-          style="width: 1rem; height: 1rem"
+          class="border-round mr-3 flex-shrink-0 item-selector"
           :class="item.color"
         ></span
         ><span class="text-xl text-base text-90"> {{ item.name }}</span
@@ -62,11 +61,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .progress {
   height: 1rem;
   font-size: 0.75rem;
-  background-color: #e9ecef;
   border-radius: 0.25rem;
 }
 
@@ -79,10 +77,13 @@ export default {
 .progress-bar {
   flex-direction: column;
   justify-content: center;
-  color: #fff;
   text-align: center;
   white-space: nowrap;
-  background-color: #0d6efd;
   transition: width 0.6s ease;
+  color: var(--surface-a);
+}
+.item-selector {
+  width: 1rem;
+  height: 1rem;
 }
 </style>

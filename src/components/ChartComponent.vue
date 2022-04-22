@@ -1,7 +1,7 @@
 <template>
   <div class="surface-card shadow-2 border-round p-4">
     <div class="flex align-items-center justify-content-between mb-3">
-      <div class="text-900 font-medium text-xl">{{ title }}</div>
+      <div class="text-gray-1 font-medium text-xl">{{ title }}</div>
     </div>
 
     <vue-frappe

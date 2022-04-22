@@ -17,18 +17,22 @@ import DataTable from "primevue/datatable";
 import Dropdown from "primevue/dropdown";
 import MultiSelect from "primevue/multiselect";
 import Badge from "primevue/badge";
+import Toast from "primevue/toast";
+import ToastService from "primevue/toastservice";
 import NewChart from "vue2-frappe";
 
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import "/node_modules/primeflex/primeflex.css";
+import "./theme/style/color-palette.css";
 
 const app = createApp(App);
 
 app.use(PrimeVue);
 app.use(router);
 app.use(NewChart);
+app.use(ToastService);
 
 app.component("Button", Button);
 app.component("Dialog", Dialog);
@@ -43,5 +47,6 @@ app.component("DataTable", DataTable);
 app.component("Dropdown", Dropdown);
 app.component("MultiSelect", MultiSelect);
 app.component("Badge", Badge);
+app.component("Toast", Toast);
 
 app.mount("#app");

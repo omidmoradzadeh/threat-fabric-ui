@@ -2,23 +2,24 @@
   <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
     <div class="flex justify-content-between mb-3 text-left">
       <div>
-        <span class="block text-500 font-medium mb-3">{{
+        <span class="block text-gray-4 font-medium mb-3">{{
           details?.title
         }}</span>
-        <div class="text-900 font-medium text-xl">{{ details?.value }}</div>
+        <div class="text-gray-1 font-medium text-xl">{{ details?.value }}</div>
       </div>
       <div
-        class="flex align-items-center justify-content-center bg-blue-100 border-round"
+        class="flex align-items-center justify-content-center border-round"
+        :class="details?.iconBgClass"
         style="width: 2.5rem; height: 2.5rem"
       >
-        <i class="pi text-blue-500 text-xl" :class="details?.iconClass"></i>
+        <i class="pi text-xl" :class="details?.iconClass"></i>
       </div>
     </div>
-    <i class="pi text-l mr-2" :class="details?.descriptionClass"></i>
+    <i class="pi text-gray-l mr-2" :class="details?.descriptionClass"></i>
     <span class="font-medium m-1" :class="details?.descriptionClass">
       {{ details?.descriptionValue }}
     </span>
-    <span class="text-500">{{ details?.descriptionText }}</span>
+    <span class="text-gray-2">{{ details?.descriptionText }}</span>
   </div>
 </template>
 
@@ -43,7 +44,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .border-round {
   border-radius: 10px !important;
 }

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="flex align-items-center justify-content-between mb-4">
+      <span class="text-xl font-medium text-gray-1">Device</span>
+    </div>
     <DataTable
       :value="devices"
       :lazy="true"
@@ -27,7 +30,21 @@
       @row-select="onRowSelect"
       @row-unselect="onRowUnselect"
     >
-      <!-- <Column selectionMode="multiple" headerStyle="width: 3em"></Column> -->
+      <template #header>
+        <div class="flex justify-content-between">
+          <Button
+            label="Clear"
+            class="p-button ml-4 bg-light-blue-1"
+            @click="clearSearch"
+          />
+          <span class="p-input-icon-left">
+            <i class="pi pi-search" />
+            <InputText v-model="search" placeholder="Search Keyword" />
+          </span>
+        </div>
+      </template>
+      <template #empty> No Device found. </template>
+      <template #loading> Loading device data. Please wait. </template>
       <Column
         field="deviceId"
         header="Device Id"
@@ -82,6 +99,20 @@
         :sortable="true"
       >
       </Column>
+      <Column :exportable="false" style="min-width: 8rem">
+        <template #body="slotProps">
+          <router-link
+            :to="{
+              name: 'deviceDetail',
+              params: { id: slotProps.data.id },
+            }"
+          >
+            <Button
+              icon=" pi pi-info-circle"
+              class="p-button-rounded -text-green-1 mr-2"
+          /></router-link>
+        </template>
+      </Column>
     </DataTable>
   </div>
 </template>
@@ -96,12 +127,8 @@ export default {
       devices: null,
       selectedDevices: null,
       selectAll: false,
-      filters: {
-        name: { value: "", matchMode: "contains" },
-        "country.name": { value: "", matchMode: "contains" },
-        company: { value: "", matchMode: "contains" },
-        "representative.name": { value: "", matchMode: "contains" },
-      },
+      filters: null,
+      search: null,
       lazyParams: {},
       columns: [
         { field: "deviceId", header: "Device Id" },
@@ -109,10 +136,23 @@ export default {
         { field: "deviceRiskLevelScore", header: "Device Risk Level Score" },
         { field: "lastSeenTimestamp", header: "Last Seen Timestamp" },
       ],
+      awaitingSearch: false,
       iosImg: require("@/assets/static/icons/ios.png"),
       androidImg: require("@/assets/static/icons/android.png"),
       pcImg: require("@/assets/static/icons/pc.png"),
     };
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    search(newQuestion, oldQuestion) {
+      if (!this.awaitingSearch) {
+        setTimeout(() => {
+          this.loadLazyData();
+          this.awaitingSearch = false;
+        }, 2000);
+      }
+      this.awaitingSearch = true;
+    },
   },
   deviceService: null,
   created() {
@@ -126,42 +166,48 @@ export default {
       rows: this.$refs.dt.rows,
       sortField: null,
       sortOrder: null,
-      filters: this.filters,
+      search: null,
     };
 
     this.loadLazyData();
   },
   methods: {
     loadLazyData() {
-      this.loading = true;
-
-      setTimeout(() => {
-        this.deviceService
-          .getdevices({ lazyEvent: JSON.stringify(this.lazyParams) })
-          .then((data) => {
-            this.devices = data.devices._elements;
-            this.totalRecords = data.totalRecords;
-            this.loading = false;
-          });
-      }, Math.random() * 1000 + 250);
+      this.lazyParams.search = this.search;
+      // this.loading = true;
+      this.deviceService
+        .getDevices({ lazyEvent: JSON.stringify(this.lazyParams) })
+        .then((data) => {
+          this.devices = data.devices._elements;
+          this.totalRecords = data.totalRecords;
+          this.loading = false;
+        });
     },
     onPage(event) {
-      this.lazyParams = event;
-      this.loadLazyData();
+      this.reloadData(event);
     },
     onSort(event) {
-      this.lazyParams = event;
-      this.loadLazyData();
+      this.reloadData(event);
     },
     onFilter() {
-      this.lazyParams.filters = this.filters;
+      this.lazyParams.search = this.search;
+      this.loadLazyData();
+    },
+    reloadData(event) {
+      this.lazyParams = event;
+      this.lazyParams.search = this.search;
+      this.loadLazyData();
+    },
+    clearSearch() {
+      this.search = "";
+      this.lazyParams.search = "";
       this.loadLazyData();
     },
     onSelectAllChange(event) {
       const selectAll = event.checked;
 
       if (selectAll) {
-        this.deviceService.getdevices().then((data) => {
+        this.deviceService.getDevices().then((data) => {
           this.selectAll = true;
           debugger;
           this.selectedDevices = data.devices._elements;
@@ -177,6 +223,7 @@ export default {
     onRowUnselect() {
       this.selectAll = false;
     },
+    goToDetail() {},
 
     getDeviceRiskLevelBadge(deviceRiskLevel) {
       return {
@@ -210,18 +257,18 @@ export default {
 }
 
 .device-badge.status-success {
-  background-color: #c8e6c9;
-  color: #256029;
+  background-color: var(--green-100);
+  color: var(--green-800);
 }
 
 .device-badge.status-warning {
-  background-color: #feedaf;
-  color: #8a5340;
+  background-color: var(--yellow-100);
+  color: var(--yellow-800);
 }
 
 .device-badge.status-danger {
-  background-color: #ff0000;
-  color: #feedaf;
+  background-color: var(--red-1);
+  color: var(--surface-0);
 }
 
 .deviceImage {

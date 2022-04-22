@@ -11,6 +11,11 @@ const routes = [
     name: "device",
     component: () => import("../views/DeviceView.vue"),
   },
+  {
+    path: "/deviceDetail/:id",
+    name: "deviceDetail",
+    component: () => import("../views/DeviceDetailView.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -1,19 +1,4 @@
 <template>
-  <!-- <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-    <router-link to="/menu">Menu</router-link>
-  </nav> -->
-
-  <!-- <div class="min-h-screen flex relative lg:static surface-ground">
-    <SideMenu :items="items" />
-    <div class="min-h-screen flex flex-column relative flex-auto">
-      <div class="p-5 flex flex-column flex-auto">
-        <router-view />
-      </div>
-    </div>
-  </div> -->
-
   <div class="">
     <div class="min-h-screen flex relative lg:static surface-ground">
       <div
@@ -25,8 +10,7 @@
           <div class="card">
             <div class="flex card-container blue-container overflow-hidden">
               <div
-                class="flex-none flex align-items-center justify-content-center"
-                style="height: 60px"
+                class="flex-none flex align-items-center justify-content-center logo"
               >
                 <div class=""></div>
               </div>
@@ -42,15 +26,7 @@
                   @click="this.isOpen = !this.isOpen"
                   class="cursor-pointer block lg:hidden text-700 mr-3 mt-1 p-ripple"
                   ><i class="pi pi-times text-4xl"></i
-                  ><span
-                    class="p-ink"
-                    style="
-                      height: 41px;
-                      width: 41px;
-                      top: 1.71875px;
-                      left: -11.5px;
-                    "
-                  ></span
+                  ><span class="p-ink"></span
                 ></a>
               </div>
             </div>
@@ -76,11 +52,10 @@
           <div class="mt-auto">
             <hr class="mb-3 mx-3 border-top-1 border-none surface-border" />
             <a
-              class="m-3 flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center hover:surface-200 border-round text-600 transition-duration-150 transition-colors p-ripple"
+              class="m-3 flex flex-row lg:flex-column align-items-center cursor-pointer p-3 lg:justify-content-center hover:surface-200 border-round text-gray-4 transition-duration-150 transition-colors p-ripple"
               ><img
                 :src="images.profileImg"
-                class="mr-2 lg:mr-0"
-                style="width: 32px; height: 32px; border-radius: 10px" /><span
+                class="mr-2 lg:mr-0 profile-img" /><span
                 class="font-medium inline lg:hidden"
                 >{{ userName }}</span
               ><span class="p-ink"></span
@@ -90,18 +65,13 @@
       </div>
       <div class="min-h-screen flex flex-column relative flex-auto">
         <div
-          class="flex justify-content-between align-items-center px-5 surface-section relative lg:static border-bottom-1 surface-border"
-          style="height: 60px"
+          class="flex justify-content-between align-items-center px-5 surface-section relative lg:static border-bottom-1 surface-border navbar-detail"
         >
           <div class="flex">
             <a
               @click="this.isOpen = !this.isOpen"
               class="cursor-pointer block lg:hidden text-700 mr-3 mt-1 p-ripple"
-              ><i class="pi pi-bars text-4xl"></i
-              ><span
-                class="p-ink"
-                style="height: 41px; width: 41px; top: 1.71875px; left: -11.5px"
-              ></span></a
+              ><i class="pi pi-bars text-4xl"></i><span class="p-ink"></span></a
             ><span class="p-input-icon-left"
               ><i class="pi pi-search"></i
               ><input
@@ -118,7 +88,7 @@
           >
             <li>
               <a
-                class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors p-ripple"
+                class="flex p-3 lg:px-3 lg:py-2 align-items-center text-gray-4 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors p-ripple"
                 ><i
                   class="pi pi-inbox text-base lg:text-2xl mr-2 lg:mr-0 p-overlay-badge"
                 ></i
@@ -128,7 +98,7 @@
             </li>
             <li>
               <a
-                class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors p-ripple"
+                class="flex p-3 lg:px-3 lg:py-2 align-items-center text-gray-4 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors p-ripple"
                 ><i
                   class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0 p-overlay-badge"
                   ><span
@@ -144,17 +114,10 @@
                 class="flex p-3 lg:px-3 lg:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors p-ripple"
                 ><img
                   :src="images.profileImg"
-                  class="mr-3 lg:mr-0"
-                  style="
-                    width: 32px;
-                    height: 32px;
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 10px;
-                  " />
+                  class="mr-3 lg:mr-0 profile-img" />
                 <div class="block lg:hidden">
                   <div class="text-900 font-medium">{{ userName }}</div>
-                  <span class="text-600 font-medium text-sm">Developer</span>
+                  <span class="text-gray-4 font-medium text-sm">Developer</span>
                 </div>
                 <span class="p-ink"></span
               ></a>
@@ -216,26 +179,38 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-}
-ul #nav {
-  color: var(--bluegray-300);
-  border-left-width: 2px !important;
-  border-left-style: solid;
-  border-color: var(--bluegray-300);
+  color: var(--blue-1);
 }
 
-ul #nav:hover {
-  color: var(--cyan-600) !important;
+ul #nav a:hover {
+  color: var(--light-blue-1) !important;
   border-left-width: 2px !important;
   border-left-style: solid;
-  border-color: var(--cyan-600) !important;
+  border-color: var(--light-blue-1) !important;
 }
 .router-link-active {
-  color: var(--cyan-600) !important;
+  color: var(--light-blue-1) !important;
   border-left-width: 2px !important;
   border-left-style: solid;
-  border-color: var(--cyan-600) !important;
+  border-color: var(--light-blue-1) !important;
+}
+
+.logo {
+  height: 60px;
+}
+
+.profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.navbar-detail {
+  height: 60px;
+}
+
+#nav a {
+  color: var(--blue-3);
 }
 
 a:link {
