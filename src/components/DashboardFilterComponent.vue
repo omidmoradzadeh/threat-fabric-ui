@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     reload() {
-      debugger;
       var count = Object.keys(!this.selectedDate).length;
       console.log(count);
       if (!this.selectedDate) {

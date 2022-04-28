@@ -163,7 +163,6 @@ export default {
   methods: {
     openSide() {
       alert(this.isOpen);
-      debugger;
       this.isOpen != this.isOpen;
       this.$emit("reload", "reload");
     },

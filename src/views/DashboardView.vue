@@ -16,7 +16,7 @@
     <div class="col-12 lg:col-6 xl:col-6" v-if="this.progress != undefined">
       <RateCardView :title="progress?.title" :progress="progress?.progress" />
     </div>
-    <div class="col-12 lg:col-3 xl:col-3">
+    <div class="col-12 md:col-12 lg:col-6 xl:col-6">
       <DashboardFilterView @reload="reload" />
     </div>
     <div class="col-12" v-if="this.chart1 != undefined">

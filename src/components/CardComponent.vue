@@ -16,7 +16,7 @@
       </div>
     </div>
     <i class="pi text-gray-l mr-2" :class="details?.descriptionClass"></i>
-    <span class="font-medium m-1" :class="details?.descriptionClass">
+    <span class="font-medium m-1">
       {{ details?.descriptionValue }}
     </span>
     <span class="text-gray-2">{{ details?.descriptionText }}</span>

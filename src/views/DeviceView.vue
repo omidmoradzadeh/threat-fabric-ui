@@ -210,7 +210,6 @@ export default {
       if (selectAll) {
         this.deviceService.getDevices().then((data) => {
           this.selectAll = true;
-          debugger;
           this.selectedDevices = data.devices._elements;
         });
       } else {
